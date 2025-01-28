@@ -9,6 +9,11 @@ import environ
 env = environ.Env()
 env.read_env(".env")
 
+try:
+    env.read_env(".env")
+    print("ENV LOADED SUCCESSFULLY")
+except Exception as e:
+    print(f"Failed to load .env: {e}")
 
 CLIENT_ID = env.str("CLIENT_ID", None)
 CLIENT_SECRET = env.str("CLIENT_SECRET", None)
