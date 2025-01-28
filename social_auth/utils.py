@@ -25,7 +25,6 @@ def create_user_or_update(user_data, via):
         }
 
     username = f"{email or facebook}-{uuid.uuid4()}"
-    print(username)
     try:
         if via == "email":
             user = User.objects.create(
