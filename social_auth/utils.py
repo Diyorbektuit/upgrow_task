@@ -25,16 +25,17 @@ def create_user_or_update(user_data, via):
         }
 
     username = f"{email or facebook}-{uuid.uuid4()}"
+    print(username)
     try:
         if via == "email":
-            user = User.objects.create_user(
+            user = User.objects.create(
                 email=email,
                 password=str(uuid.uuid4())[:8],
                 auth_type=auth_type,
                 username=username,
             )
         else:
-            user = User.objects.create_user(
+            user = User.objects.create(
                 facebook=facebook,
                 password=str(uuid.uuid4())[:8],
                 auth_type=auth_type,
@@ -43,7 +44,7 @@ def create_user_or_update(user_data, via):
         user.save()
     except IntegrityError:
         username = f"{email or facebook}-{uuid.uuid4()}"
-        user = User.objects.create_user(
+        user = User.objects.create(
             email=email,
             facebook=facebook,
             password=str(uuid.uuid4())[:8],
