@@ -1,6 +1,7 @@
 import uuid
 
 from .models import User
+import uuid
 
 
 def create_user_or_update(user_data, via):
@@ -22,19 +23,20 @@ def create_user_or_update(user_data, via):
             "refresh": user.first().tokens()["refresh"],
             "first": 0
         }
+    username = uuid.uuid4()
     if via == "email":
         user = User.objects.create_user(
             email=email,
             password=str(uuid.uuid4())[:8],
             auth_type=auth_type,
-            username=email,
+            username=f"{email}-{username}",
         )
     else:
         user = User.objects.create_user(
             facebook=facebook,
             password=str(uuid.uuid4())[:8],
             auth_type=auth_type,
-            username=facebook,
+            username=f"{facebook}-{username}",
         )
     user.save()
     return {
