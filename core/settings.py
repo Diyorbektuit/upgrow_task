@@ -19,7 +19,7 @@ env = environ.Env()
 env.read_env(".env")
 
 DEBUG = env.bool("DEBUG", False)
-SECRET_KEY = env.str("SECRET_KEY", None)
+SECRET_KEY = env.str("SECRET_KEY", "Some_Secret_key")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
